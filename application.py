@@ -13,7 +13,7 @@ loading = "test"
 print(engine)
 app=Flask(__name__)
 
-@app.route("/upload", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def upload_file(loading="loading 123"):
     print("Upload alle bestanden")
     if request.method == 'POST':
