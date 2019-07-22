@@ -15,19 +15,20 @@
     <body>
         <nav>
             <div class="nav-wrapper grey darken-4">
-                <a href="#" class="brand-logo">DutchDays - dataformat</a>
+                <a style="padding-left: 30px; font-size: 20px;" href="#" class="brand-logo">DutchDays - dataformat</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                 </ul>
             </div>
         </nav>
-        {{loading}}
-        {% if loading %}
-        <h1>Hello {{ loading }}!</h1>
-      {% else %}
-        <h1>Hello, World! {{ loading }}</h1>
-      {% endif %}
-      <div class="container" style="padding-top:100px;">
-          <div class="row">
+
+      <div class="container" >
+          <div class="row" style="padding-top:100px;">
+            <h4>Genereren van het dataformat</h4>
+            <p>
+                Met deze applicatie kan de data voor het dataformat gegenereerd worden. De data wordt samengesteld op basis van de bestanden die aangeleverd worden. Hierbij is het noodzakelijk dat de geleverde bestanden als Excel-bestand en in de orginele structuur(NoCore) geleverd worden. Het verwerken van de data kan 5 tot 10 minuten of zelfs langer duren.
+            </p>
+          </div>
+          <div class="row" style="padding-top:10px;">
                 <form enctype="multipart/form-data" action="" method="post">
                     <div class="col s4">
                         <div class="row">
@@ -35,33 +36,36 @@
                                 <div class="card">
                                 <div class="card-content">
                                     <span class="card-title">Medewerker</span>
-                                    <p>I am a very simple card. I am good at containing small bits of information.
-                                    I am convenient because I require little markup to use effectively.</p>
+                                    <p>Upload het Excel-bestand met de gegevens van medewerkers vanuit NoCore. Hieronder staat een voorbeeld tabel met de data van de medewerkers</p>
                                 
                                     <table>
                                             <thead>
                                               <tr>
-                                                  <th>Name</th>
-                                                  <th>Item Name</th>
-                                                  <th>Item Price</th>
+                                                  <th>SollicitantID</th>
+                                                  <th>naam</th>
+                                                  <th>veld0</th>
+                                                  <th>...</th>
                                               </tr>
                                             </thead>
                                     
                                             <tbody>
                                               <tr>
-                                                <td>Alvin</td>
-                                                <td>Eclair</td>
-                                                <td>$0.87</td>
+                                                <td>001</td>
+                                                <td>J. Wick</td>
+                                                <td>Wick</td>
+                                                <td>...</td>
                                               </tr>
                                               <tr>
-                                                <td>Alan</td>
-                                                <td>Jellybean</td>
-                                                <td>$3.76</td>
+                                                <td>002</td>
+                                                <td>T. Hanks</td>
+                                                <td>Hanks</td>
+                                                <td>...</td>
                                               </tr>
                                               <tr>
-                                                <td>Jonathan</td>
-                                                <td>Lollipop</td>
-                                                <td>$7.00</td>
+                                                <td>003</td>
+                                                <td>W. Smith</td>
+                                                <td>Smith</td>
+                                                <td>...</td>
                                               </tr>
                                             </tbody>
                                           </table>
@@ -79,8 +83,39 @@
                                     <div class="card">
                                     <div class="card-content">
                                         <span class="card-title">Projecturen</span>
-                                        <p>I am a very simple card. I am good at containing small bits of information.
-                                        I am convenient because I require little markup to use effectively.</p>
+                                        <p>Upload het Excel-bestand met de gegevens van projecturen vanuit NoCore. Hieronder staat een voorbeeld tabel met de data van de projecturen</p>
+                                
+                                        <table>
+                                                <thead>
+                                                  <tr>
+                                                      <th>SollicitantID</th>
+                                                      <th>cNaam</th>
+                                                      <th>JaarWeek</th>
+                                                      <th>...</th>
+                                                  </tr>
+                                                </thead>
+                                        
+                                                <tbody>
+                                                  <tr>
+                                                    <td>001</td>
+                                                    <td>J. Wick</td>
+                                                    <td>201906</td>
+                                                    <td>...</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>001</td>
+                                                    <td>J. Wick</td>
+                                                    <td>201907</td>
+                                                    <td>...</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>001</td>
+                                                    <td>J. Wick</td>
+                                                    <td>201908</td>
+                                                    <td>...</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
                                     </div>
                                     <div class="card-action">
                                         <input type="file" name="projecturen">
@@ -94,8 +129,39 @@
                                     <div class="card">
                                     <div class="card-content">
                                         <span class="card-title">Jobs</span>
-                                        <p>I am a very simple card. I am good at containing small bits of information.
-                                        I am convenient because I require little markup to use effectively.</p>
+                                        <p>Upload het Excel-bestand met de gegevens van jobs vanuit NoCore. Hieronder staat een voorbeeld tabel met de data van de jobs</p>
+                                
+                                        <table>
+                                                <thead>
+                                                  <tr>
+                                                      <th>ProjectId</th>
+                                                      <th>MedewerkerId</th>
+                                                      <th>NaamMedewerker</th>
+                                                      <th>...</th>
+                                                  </tr>
+                                                </thead>
+                                        
+                                                <tbody>
+                                                  <tr>
+                                                    <td> </td>
+                                                    <td>001</td>
+                                                    <td>J. Wick</td>
+                                                    <td>...</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td> </td>
+                                                    <td>001</td>
+                                                    <td>J. Wick</td>
+                                                    <td>...</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td> </td>
+                                                    <td>001</td>
+                                                    <td>J. Wick</td>
+                                                    <td>...</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
                                     </div>
                                     <div class="card-action">
                                         <input type="file" name="jobs">
