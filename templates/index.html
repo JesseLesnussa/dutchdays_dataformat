@@ -1,26 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+{% extends "nav.html" %}
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dataformat Dutch Days</title>
-</head>
-    <body>
-        <nav>
-            <div class="nav-wrapper grey darken-4">
-                <a style="padding-left: 30px; font-size: 20px;" href="#" class="brand-logo">DutchDays - dataformat</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                </ul>
-            </div>
-        </nav>
-
+{% block content %}
       <div class="container" >
           <div class="row" style="padding-top:100px;">
             <h4>Genereren van het dataformat</h4>
@@ -128,7 +108,7 @@
                             <div class="col s12">
                                     <div class="card">
                                     <div class="card-content">
-                                        <span class="card-title">Jobs</span>
+                                        <span class="card-title">Jobs/Projectenlijst</span>
                                         <p>Upload het Excel-bestand met de gegevens van jobs vanuit NoCore. Hieronder staat een voorbeeld tabel met de data van de jobs</p>
                                 
                                         <table>
@@ -175,7 +155,4 @@
                 </button>
                 </form>
             </div>     
-
-      
-    </body>
-</html>
+        {% endblock %}
