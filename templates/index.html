@@ -2,14 +2,14 @@
 
 {% block content %}
       <div class="container" >
-          <div class="row" style="padding-top:100px;">
+          <div class="row" style="padding-top:60px;">
             <h4>Genereren van het dataformat</h4>
             <p>
                 Met deze applicatie kan de data voor het dataformat gegenereerd worden. De data wordt samengesteld op basis van de bestanden die aangeleverd worden. Hierbij is het noodzakelijk dat de geleverde bestanden als Excel-bestand en in de orginele structuur(NoCore) geleverd worden. Het verwerken van de data kan 5 tot 10 minuten of zelfs langer duren.
             </p>
           </div>
           <div class="row" style="padding-top:10px;">
-                <form enctype="multipart/form-data" action="" method="post">
+                <form  onSubmit="clickButton(event)" enctype="multipart/form-data" action="/upload" method="post">
                     <div class="col s4">
                         <div class="row">
                             <div class="col s12">
@@ -111,7 +111,7 @@
                                         <span class="card-title">Jobs/Projectenlijst</span>
                                         <p>Upload het Excel-bestand met de gegevens van jobs vanuit NoCore. Hieronder staat een voorbeeld tabel met de data van de jobs</p>
                                 
-                                        <table>
+                                        <table >
                                                 <thead>
                                                   <tr>
                                                       <th>ProjectId</th>
@@ -151,8 +151,27 @@
                     </div>
                 </div>
                 
-                <button class="btn waves-effect waves-light amber darken-2" type="submit" name="action">Genereer dataformat
+                <button id="submitBestanden" class="btn waves-effect waves-light amber darken-2" type="submit" name="action">Genereer dataformat
                 </button>
                 </form>
+
+                <div id="Loader" hidden>
+                    <div class="progress">
+                        <div class="indeterminate amber darken-2" style="width: 100%"></div>
+                    </div>                  
+                </div>
             </div>     
+
+
+            <script>
+            
+            function clickButton(e) {
+              console.log(e)
+              document.getElementById("Loader").hidden = false
+              document.getElementById("submitBestanden").hidden = true
+              document.getElementById("submitBestanden").setAttribute("disabled","true")
+              e.submit()
+            }
+            
+            </script>
         {% endblock %}
