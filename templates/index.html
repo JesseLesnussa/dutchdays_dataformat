@@ -52,7 +52,7 @@
                                
                                 </div>
                                 <div class="card-action">
-                                    <input type="file" name="medewerkers">
+                                    <input  onChange="handleFile()" id="medewerkers"  type="file" name="medewerkers">
                                 </div>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
                                               </table>
                                     </div>
                                     <div class="card-action">
-                                        <input type="file" name="projecturen">
+                                        <input onChange="handleFile()" id="projecturen" type="file" name="projecturen">
                                     </div>
                                     </div>
                                 </div>
@@ -144,19 +144,25 @@
                                               </table>
                                     </div>
                                     <div class="card-action">
-                                        <input type="file" name="jobs">
+                                        <input onChange="handleFile()"  id="jobs" type="file" name="jobs">
                                     </div>
                                     </div>
                                 </div>
                     </div>
                 </div>
                 
-                <button id="submitBestanden" class="btn waves-effect waves-light amber darken-2" type="submit" name="action">Genereer dataformat
+                <button id="submitBestanden" class="btn waves-effect waves-light amber darken-2" type="submit" name="action" >Genereer dataformat
                 </button>
+
+                <div class="progress orange lighten-5">
+                  <div id="progressBar-files" class="determinate orange darken-3" style="width: 0%"></div>
+              </div>
+        
+              
                 </form>
 
                 <div id="Loader" hidden>
-                    <div class="progress">
+                    <div class="progress indeterminate amber lighten-5">
                         <div class="indeterminate amber darken-2" style="width: 100%"></div>
                     </div>                  
                 </div>
@@ -166,12 +172,50 @@
             <script>
             
             function clickButton(e) {
-              console.log(e)
-              document.getElementById("Loader").hidden = false
-              document.getElementById("submitBestanden").hidden = true
-              document.getElementById("submitBestanden").setAttribute("disabled","true")
-              e.submit()
+              if
+                (
+                !document.getElementById("medewerkers").value ||
+                !document.getElementById("projecturen").value ||
+                !document.getElementById("jobs").value 
+                )
+              {
+                e.preventDefault()
+                alert("Geef alle bestanden mee")
+              } 
+              else
+              {
+                document.getElementById("Loader").hidden = false
+                document.getElementById("submitBestanden").hidden = true
+                document.getElementById("submitBestanden").setAttribute("disabled","true")
+              }
+
             }
             
+            function handleFile()
+            {
+              percentage = 0
+
+              if(document.getElementById("medewerkers").value)
+              {
+                percentage += 33.3333333
+              }
+
+              if(document.getElementById("projecturen").value)
+              {
+                percentage += 33.3333333
+              }
+
+              if(document.getElementById("jobs").value)
+              {
+                percentage += 33.3333333
+              }
+              
+              if(percentage > 98) document.getElementById("submitBestanden").disabled = false;
+              if(percentage <= 98) document.getElementById("submitBestanden").disabled = true;
+
+              console.log(percentage)
+              document.getElementById("progressBar-files").style = "width:" + String(percentage) + "%;"
+              
+            }
             </script>
         {% endblock %}
