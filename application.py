@@ -7,7 +7,6 @@ from sqlalchemy import create_engine
 import urllib
 from sqlalchemy import *
 import openpyxl
-import uuid
 
 params = urllib.parse.quote("Driver={SQL Server};Server=tcp:yellowarrow.database.windows.net,1433;Database=YellowArrow;Uid=yellowarrowadmin@yellowarrow;Pwd=!InzichtIn01;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
@@ -20,15 +19,11 @@ filename = ""
 def homepage():
     return render_template('index.html')
 
-@app.route("/loading")
-def loading():
-    return render_template('loading.html')
-
 @app.route("/upload", methods=['GET', 'POST'])
 def upload_file():
     render_template('loading.html')
     if request.method == 'POST':
-        filename = str(uuid.uuid4()) + ".xlsx" 
+        filename = "BuyFlex Dataformat export.xlsx" 
         render_template('loading.html')
         connection = engine.connect()
         print(request.files['medewerkers'])
