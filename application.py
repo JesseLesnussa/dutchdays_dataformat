@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify, render_template, send_file
 from sqlalchemy import create_engine
-import urllib.parse
+try:
+    from urllib.parse import urlparse
+except ImportError:
+     from urlparse import urlparse
 import pandas as pd
 import pyodbc
 from sqlalchemy import create_engine
