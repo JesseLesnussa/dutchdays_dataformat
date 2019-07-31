@@ -1,0 +1,96 @@
+{% extends "nav.html" %}
+
+{% block content %}
+      <div class="container" >
+          <div class="row" style="padding-top:60px;">
+              <div class="col s4">
+                  <div class="col s12">
+                      <div class="card">
+                          <div class="card-content">
+                              <span class="card-title">Acties</span>
+                              <p>Het bestand is succesvol gegenereerd!</p>                
+                          </div>
+                          <div class="card-action">
+                          <a href="../uploads/{{ filename }}">
+                              <button class="btn waves-effect waves-light amber darken-1">
+                                  Download Excel-bestand
+                                  </button>
+                            </a>
+                                  <br>
+                                  <br>
+                              <a href="../uploads/template.xlsx">
+                                <button class="btn waves-effect waves-light  amber darken-3">
+                                  Download template
+                                </button>
+                              </a>
+                              <br>
+                              <br>
+                               <a href="/">
+                                <button class="btn waves-effect waves-light  grey lighten-5 amber-text text-darken-2">
+                                    Terug
+                                   </button>
+                              </a>
+                          </div>
+                        </div>
+                  </div>
+                  <!--div class="col s12">
+                      <div class="card">
+                          <div class="card-content">
+                              <span class="card-title">Statistieken</span>
+                              <p>Hieronder bevindt zich data van de meegegeven bestanden</p>                
+                          </div>
+                          <div class="card-action">
+                              <ul class="collection">
+                                  <li class="collection-item avatar">
+                                    <img src="images/yuna.jpg" alt="" class="circle">
+                                    <span class="title">Title</span>
+                                    <p>First Line <br>
+                                       Second Line
+                                    </p>
+                                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                                  </li>
+                                  <li class="collection-item avatar">
+                                    <i class="material-icons circle">folder</i>
+                                    <span class="title">Title</span>
+                                    <p>First Line <br>
+                                       Second Line
+                                    </p>
+                                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                                  </li>
+                                  <li class="collection-item avatar">
+                                    <i class="material-icons circle green">insert_chart</i>
+                                    <span class="title">Title</span>
+                                    <p>First Line <br>
+                                       Second Line
+                                    </p>
+                                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                                  </li>
+                                  <li class="collection-item avatar">
+                                    <i class="material-icons circle red">play_arrow</i>
+                                    <span class="title">Title</span>
+                                    <p>First Line <br>
+                                       Second Line
+                                    </p>
+                                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                                  </li>
+                                </ul>
+                          </div>
+                        </div>
+                  </div-->
+              </div>
+              <div class="col s8"> 
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Export data</span>
+                    Het gegenereerde BuyFlex data
+                  </div>
+                  <div class="card-action">
+                      <div style="overflow: scroll; max-height:800px; max-width:100%; font-size: 8px;">
+                          {{ value|safe}}
+                      </div>
+                  </div>
+                </div>
+              </div>
+          </div>          
+      </div>     
+{% endblock %}

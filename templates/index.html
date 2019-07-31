@@ -1,35 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+{% extends "nav.html" %}
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dataformat Dutch Days</title>
-</head>
-    <body>
-        <nav>
-            <div class="nav-wrapper grey darken-4">
-                <a style="padding-left: 30px; font-size: 20px;" href="#" class="brand-logo">DutchDays - dataformat</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                </ul>
-            </div>
-        </nav>
-
+{% block content %}
       <div class="container" >
-          <div class="row" style="padding-top:100px;">
+          <div class="row" style="padding-top:60px;">
             <h4>Genereren van het dataformat</h4>
             <p>
                 Met deze applicatie kan de data voor het dataformat gegenereerd worden. De data wordt samengesteld op basis van de bestanden die aangeleverd worden. Hierbij is het noodzakelijk dat de geleverde bestanden als Excel-bestand en in de orginele structuur(NoCore) geleverd worden. Het verwerken van de data kan 5 tot 10 minuten of zelfs langer duren.
             </p>
           </div>
           <div class="row" style="padding-top:10px;">
-                <form enctype="multipart/form-data" action="" method="post">
+                <form  onSubmit="clickButton(event)" enctype="multipart/form-data" action="/upload" method="post">
                     <div class="col s4">
                         <div class="row">
                             <div class="col s12">
@@ -72,7 +52,7 @@
                                
                                 </div>
                                 <div class="card-action">
-                                    <input type="file" name="medewerkers">
+                                    <input  onChange="handleFile()" id="medewerkers"  type="file" name="medewerkers">
                                 </div>
                                 </div>
                             </div>
@@ -118,7 +98,7 @@
                                               </table>
                                     </div>
                                     <div class="card-action">
-                                        <input type="file" name="projecturen">
+                                        <input onChange="handleFile()" id="projecturen" type="file" name="projecturen">
                                     </div>
                                     </div>
                                 </div>
@@ -128,10 +108,10 @@
                             <div class="col s12">
                                     <div class="card">
                                     <div class="card-content">
-                                        <span class="card-title">Jobs</span>
+                                        <span class="card-title">Jobs/Projectenlijst</span>
                                         <p>Upload het Excel-bestand met de gegevens van jobs vanuit NoCore. Hieronder staat een voorbeeld tabel met de data van de jobs</p>
                                 
-                                        <table>
+                                        <table >
                                                 <thead>
                                                   <tr>
                                                       <th>ProjectId</th>
@@ -164,18 +144,78 @@
                                               </table>
                                     </div>
                                     <div class="card-action">
-                                        <input type="file" name="jobs">
+                                        <input onChange="handleFile()"  id="jobs" type="file" name="jobs">
                                     </div>
                                     </div>
                                 </div>
                     </div>
                 </div>
-                
-                <button class="btn waves-effect waves-light amber darken-2" type="submit" name="action">Genereer dataformat
+                 
+                <button id="submitBestanden" class="btn waves-effect waves-light amber darken-2" type="submit" name="action" >Genereer dataformat
                 </button>
+
+                <div class="progress orange lighten-5">
+                  <div id="progressBar-files" class="determinate orange darken-3" style="width: 0%"></div>
+              </div>
+        
+              
                 </form>
+
+                <div id="Loader" hidden>
+                    <div class="progress indeterminate amber lighten-5">
+                        <div class="indeterminate amber darken-2" style="width: 100%"></div>
+                    </div>                  
+                </div>
             </div>     
 
-      
-    </body>
-</html>
+
+            <script>
+            
+            function clickButton(e) {
+              if
+                (
+                !document.getElementById("medewerkers").value ||
+                !document.getElementById("projecturen").value ||
+                !document.getElementById("jobs").value 
+                )
+              {
+                e.preventDefault()
+                alert("Geef alle bestanden mee")
+              } 
+              else
+              {
+                document.getElementById("Loader").hidden = false
+                document.getElementById("submitBestanden").hidden = true
+                document.getElementById("submitBestanden").setAttribute("disabled","true")
+              }
+
+            }
+            
+            function handleFile()
+            {
+              percentage = 0
+
+              if(document.getElementById("medewerkers").value)
+              {
+                percentage += 33.3333333
+              }
+
+              if(document.getElementById("projecturen").value)
+              {
+                percentage += 33.3333333
+              }
+
+              if(document.getElementById("jobs").value)
+              {
+                percentage += 33.3333333
+              }
+              
+              if(percentage > 98) document.getElementById("submitBestanden").disabled = false;
+              if(percentage <= 98) document.getElementById("submitBestanden").disabled = true;
+
+              console.log(percentage)
+              document.getElementById("progressBar-files").style = "width:" + String(percentage) + "%;"
+              
+            }
+            </script>
+        {% endblock %}
