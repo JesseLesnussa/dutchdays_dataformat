@@ -9,14 +9,16 @@ import pyodbc
 from sqlalchemy import create_engine
 import urllib
 from sqlalchemy import *
-import openpyxl
 
-params = urllib.parse.quote("DRIVER={ODBC Driver 13 for SQL Server};Server=tcp:yellowarrow.database.windows.net,1433;Database=YellowArrow;Uid=yellowarrowadmin@yellowarrow;Pwd=!InzichtIn01;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
+
+params = urllib.parse.quote("DRIVER={SQL Server};Server=tcp:yellowarrow.database.windows.net,1433;Database=YellowArrow;Uid=yellowarrowadmin@yellowarrow;Pwd=!InzichtIn01;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 loading = "test"
 print(engine)
 app=Flask(__name__)
 filename = ""
+for driver in pyodbc.drivers():
+    print(driver)
 
 @app.route("/")
 def homepage():
