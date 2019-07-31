@@ -29,23 +29,30 @@ def upload_file():
     render_template('loading.html')
     if request.method == 'POST':
         filename = "BuyFlex Dataformat export.xlsx" 
-        render_template('loading.html')
         connection = engine.connect()
-        print(request.files['medewerkers'])
-        print('Verwerken van medewerkers...')
-        medewerkers = request.files['medewerkers']
-        medewerkers_df = pd.read_excel(medewerkers, index=False)
-        medewerkers_df = medewerkers_df.iloc[1:]
-        medewerkers_df = medewerkers_df.filter(['SollicitantID', 'naam', 'veld0', 'veld1', 'veld2'])
-        medewerkers_df.to_sql('NoCore_Medewerkers', con=engine, if_exists='replace', index=False)
-        print('Succes!')
+        #print(request.files['medewerkers'])
+        #print('Verwerken van medewerkers...')
+        #medewerkers = request.files['medewerkers']
+        #medewerkers_df = pd.read_excel(medewerkers, index=False)
+        #medewerkers_df = medewerkers_df.iloc[1:]
+        #medewerkers_df = medewerkers_df.filter(['SollicitantID', 'naam', 'veld0', 'veld1', 'veld2'])
+        #medewerkers_df.to_sql('NoCore_Medewerkers', con=engine, if_exists='replace', index=False)
+        #print('Succes!')
         print(request.files['projecturen'])
         print('Verwerken van projecturen...')
         projecturen = request.files['projecturen']
         projecturen_df = pd.read_excel(projecturen)
+        projecturen_df.columns = projecturen_df.iloc[0]
+        projecturen_df =  projecturen_df.iloc[1:]
         projecturen_df=projecturen_df.rename(columns = {'Text187':'Tarief'})
         projecturen_df=projecturen_df.rename(columns = {'Refnr Klant':'RefnrKlant'})
+        print("converting string sollicitant id")
+        
+        for col in projecturen_df.columns: 
+            print(col) 
+        print(projecturen_df.head(5).to_string())
         projecturen_df['SollicitantID'] = projecturen_df['SollicitantID'].astype(str)
+        print("success!")
         projecturen_df.to_sql('ProjectUrenTarief', con=engine, if_exists='replace', index=False)
         print('Succes!')
         print(request.files['jobs'])
@@ -61,7 +68,7 @@ def upload_file():
         connection.execute(text("EXEC spGetDataFormat").execution_options(autocommit=True))
         print('Succes!')
         connection.close()
-        df =  pd.read_sql_table('vwDataFormat', con=engine);
+        df =  pd.read_sql_table('vwDataFormat', con=engine)
         df.to_excel( 'uploads/' + filename , index=False, header=False )         
 
         return render_template('export.html', value= df.to_html(index=False, header=False), filename=filename)
