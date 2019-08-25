@@ -15,10 +15,7 @@ import openpyxl
 
 params = urllib.parse.quote("DRIVER={SQL Server};Server=tcp:yellowarrow.database.windows.net,1433;Database=YellowArrow;Uid=yellowarrowadmin@yellowarrow;Pwd=!InzichtIn01;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-loading = "test"
-print(engine)
 app=Flask(__name__)
-
 
 def setColumnNames(df, columnNames):
     df.columns = columnNames
@@ -30,7 +27,6 @@ def homepage():
 
 @app.route("/upload", methods=['GET', 'POST'])
 def upload_file():
-    render_template('loading.html')
     if request.method == 'POST':
         filename = "BuyFlex Dataformat export.xlsx" 
         connection = engine.connect()
