@@ -65,3 +65,5 @@ def download(filename):
     
 if __name__ == "__main__":
     app.run()
+
+app.secret_key = "secret_key" 
